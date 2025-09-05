@@ -11,7 +11,7 @@ export const createDeal = async (
   try {
     const { title, description, dhs, yieldNum, sold, tiket, daysLeft } =
       req.body;
-    const file = req.file;
+    const file = req.file as Express.Multer.File & { path: string };
 
     if (
       !title ||
@@ -31,7 +31,7 @@ export const createDeal = async (
       data: {
         title,
         description,
-        image: `/uploads/${file!.filename}`,
+        image: file.path,
         dhs: parseInt(dhs, 10),
         yieldNum: parseInt(yieldNum, 10),
         sold: parseInt(sold, 10),
